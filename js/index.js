@@ -30,13 +30,12 @@ function calculateAll() {
     total += updateSubtotal(products[i]);
   }
 
-  document.querySelector("#total-value span").innerHTML = total;
-
   // ITERATION 3
   //... your code goes here
+
+  document.querySelector("#total-value span").innerHTML = total;
 }
-let trTag = document.querySelector("tr")
-console.log(trTag);
+
 // ITERATION 4
 
 function removeProduct(event) {
@@ -44,17 +43,42 @@ function removeProduct(event) {
   console.log("The target in remove is:", target);
   //... your code goes here
 
-  let parent = document.querySelector("tbody");
-  let trTag = document.querySelector("tr")
-  parent.removeChild(trTag);
-
-
+  let rowToRemove = target.parentNode.parentNode;
+  let  parent = rowToRemove.parentNode;
+  parent.removeChild(rowToRemove);
 }
 
 // ITERATION 5
 
 function createProduct() {
+
+  console.log("epa")
   //... your code goes here
+  let newName = document.querySelector(".create-product input")
+  let newPrice = document.querySelector('.create-product input[type = "number"')
+  let fixedPrice = Number(newPrice.value).toFixed(2)
+  let newRow = document.createElement("tr")
+  newRow.innerHTML = 
+  ` <td class="name">
+    <span>${newName.value}</span>
+  </td>
+  <td class="price">$<span>25.00</span></td>
+  <td class="quantity">
+    <input type="number" value="0" min="0" placeholder="Quantity" />
+  </td>
+  <td class="subtotal">$<span>${fixedPrice}</span></td>
+  <td class="action">
+    <button class="btn btn-remove">Remove</button>
+  </td>`
+  newRow.setAtribute("class", "product")
+  let parent = document.querySelector("tbody")
+  parent.appendChild(newRow)
+
+
+  // reset value
+  let newName = "";
+  let newPrice= 0;
+
 }
 
 window.addEventListener("load", () => {
@@ -68,6 +92,9 @@ window.addEventListener("load", () => {
     // btnRemove[i].onclick = function (event) {
     //   target.removeChild(paragraph)
   }
+
+  const createButton =  document.getElementById("create")
+  createButton.addEventListener("click", createProduct)
 
   //... your code goes here
 });
